@@ -1,9 +1,10 @@
-const Map = () => {
+const MapPage = () => {
     return (
         <div clasName='mapPage'>
-            <Map />
+            <h1>Map Page </h1>
+            <MapLogic />
         </div>
     )
 }
 
-export default Map 
+export default MapPage

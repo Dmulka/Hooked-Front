@@ -1,12 +1,9 @@
-import { Link } from 'react-router-dom'
-
-
-
 const Login = () => {
     return (
-        <h1>Login page here</h1>
+        <div>  
+        <h1>This is login</h1>  
+        </div>
     )
-    
 }
 
 export default Login 
