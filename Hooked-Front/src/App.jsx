@@ -11,7 +11,7 @@ function App() {
   return (
     <div className= 'App'>
       <header className='app-header'><Header /></header>
-      <mmain className='app-main'><Main /></mmain>
+      <main className='app-main'><Main /></main>
       <footer className='app-footer'><Footer /></footer>
     </div>
   )

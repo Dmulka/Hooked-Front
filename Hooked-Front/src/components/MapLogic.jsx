@@ -13,8 +13,8 @@ const MapLogic = () => {
     const data = response.data 
 
     mapboxgl.accessToken = import.meta.env.VITE_APP_MAPBOXTOKEN
-    const map = mapboxgl.Map({
-        csontainer: mapCcontainerRef.corrent,
+    const map = new mapboxgl.Map({
+        csontainer: mapCcontainerRef.current,
         style: 'mapbox://styles/mapbox/streets-v12',
         center: [-88.09, 42.2],
         zoom: 10,

@@ -1,6 +1,7 @@
 const Home = () => {
     return (
-        <h1>This is Home</h1>
+    
+        <h1 className='title'>Hooked</h1>
     )
     
 }

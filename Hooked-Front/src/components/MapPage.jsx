@@ -1,6 +1,11 @@
+import React, { useState, useEffect } from 'react'
+import MapLogic from './MapLogic'
+import { Link } from 'react-router-dom'
+
+
 const MapPage = () => {
     return (
-        <div clasName='mapPage'>
+        <div className='mapPage'>
             <h1>Map Page </h1>
             <MapLogic />
         </div>

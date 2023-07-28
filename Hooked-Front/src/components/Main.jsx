@@ -3,6 +3,7 @@ import Home from './Home'
 import Login from './login'
 import CreateAccount from './CreateAccount'
 import MapPage from './MapPage'
+import Report from './Report'
 
 
 const Main = () => {
@@ -13,6 +14,7 @@ const Main = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/createaccount" element={<CreateAccount/>} />
                 <Route path="/mappage" element={<MapPage/>} />
+                <Route path='/report' element={<Report/>} />
             </Routes>
         </div>
     )
