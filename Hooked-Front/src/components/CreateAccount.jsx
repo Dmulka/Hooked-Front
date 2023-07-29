@@ -20,7 +20,7 @@ const CreateAccount = () => {
 
     const handleSubmit = async (evt) => {
         evt.preventDefault()
-        console.log(fromState)
+        console.log(formState)
     
     try {
         const response = await asiox.post('http://localhost:3001/api/users',{
@@ -31,7 +31,7 @@ const CreateAccount = () => {
         })
         console.log(response.data)
     } catch (error)  {
-        if (!err?.response) {
+        if (!error?.response) {
             setErrorMessage ('No server response')
         } else {
             setErrorMessage('signup faild') 
@@ -57,7 +57,7 @@ const CreateAccount = () => {
                 </div>
                 <div className ='form-input'>
                     <label htmlFor='userName'>create a username</label>
-                    <input onChange ={(e) => setUserName(e.target.value)}
+                    <input onChange ={handleChange}
                            name='userName'
                            type='text'
                            id= 'userNamee'

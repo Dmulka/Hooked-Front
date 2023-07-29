@@ -5,16 +5,17 @@ import React, { useEffect, useRef } from 'react'
 
 
 const MapLogic = () => {
-    const mapCcontainerRef = useRef(null)
+    const mapContainerRef = useRef(null)
     useEffect(() => {
     const fetchData = async () => {
     try {
     const response = await axios.get('http://localhost:3001/api/reports')
     const data = response.data 
+    console.log(response)
 
     mapboxgl.accessToken = import.meta.env.VITE_APP_MAPBOXTOKEN
     const map = new mapboxgl.Map({
-        csontainer: mapCcontainerRef.current,
+        container: mapContainerRef.current,
         style: 'mapbox://styles/mapbox/streets-v12',
         center: [-88.09, 42.2],
         zoom: 10,
@@ -29,7 +30,7 @@ const MapLogic = () => {
         const comment = entry.comment 
         const marker = new mapboxgl.Marker({color: '#FFC000'})
         .setLngLat([lon, lat])
-        .setPopup(new mapboxgl.Popup({className: 'popup'}).setHTML(`<h2>Report of ${type} at ${time} on ${date}</h2>`))
+        .setPopup(new mapboxgl.Popup({className: 'popup'}).setHTML(`<h2>Report of ${species} at ${season} on ${depth} </h2>`))
         .addTo(map)
     })
 
@@ -42,8 +43,10 @@ const MapLogic = () => {
     }, [])
 
     return (
-        <div className= 'mapBox'>
-            <div className='map' ref={mapCcontainerRef} />
+        <div className= 'mapBox' style={{width:'100%', height:'100%'}}>
+
+            <div className='map' ref={mapContainerRef} style={{width:'100%', height:'100%'}}/>
+
          </div>   
 
     )
