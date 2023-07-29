@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-import {  AuthContext } from './AuthCoontext'
-
-
+// import { AuthContext } from './AuthCoontext'
 
 
 const Login = () => {
@@ -17,8 +15,6 @@ const Login = () => {
     useEffect(() => {
         fetchUser()
     },[])
-
-
 
 const fetchUser = async () => {
     try {
@@ -55,8 +51,6 @@ const fetchUser = async () => {
         password: '',
       });
     };
-
-    
 
 
     return (

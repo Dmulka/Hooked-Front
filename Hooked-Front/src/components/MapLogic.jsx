@@ -17,7 +17,7 @@ const MapLogic = () => {
     const map = new mapboxgl.Map({
         container: mapContainerRef.current,
         style: 'mapbox://styles/mapbox/streets-v12',
-        center: [-88.09, 42.2],
+        center: [-88, 42.2],
         zoom: 10,
     })
     data.forEach((entry) => {

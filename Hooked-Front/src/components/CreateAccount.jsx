@@ -23,7 +23,7 @@ const CreateAccount = () => {
         console.log(formState)
     
     try {
-        const response = await asiox.post('http://localhost:3001/api/users',{
+        const response = await axios.post('http://localhost:3001/api/users',{
             name: formState.name,
             userName: formState.userName,
             email: formState.email,

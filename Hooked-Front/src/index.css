@@ -39,6 +39,6 @@
 
 
   .map.mapboxgl-map {
-    width: 1200px;
-    height:500px;
+    width: 1200px !important;
+    height:500px !important;
   }
