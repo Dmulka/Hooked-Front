@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-// import { AuthContext } from './AuthCoontext'
+import { AuthContext } from './AuthContext'
 
 
 const Login = () => {
@@ -32,18 +32,12 @@ const fetchUser = async () => {
     const handleSubmit = (event) => {
         event.preventDefault()
     
-    // Find the user with matching username
     const user = users.find((user) => user.userName === formState.userName)
-
-    // Check if the user exists and the password matches
     if (user && user.password === formState.password) {
-        // Perform successful login actions (e.g., set token, update context)
         login(); // Call the login function from your AuthContext
         // Optionally, you can redirect the user to a dashboard page or private area
       } else {
-        // Handle login failure
         console.log('Login failed. Invalid credentials.');
-        // You can display an error message to the user here
       }
   
       setFormState({
