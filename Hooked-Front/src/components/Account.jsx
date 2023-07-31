@@ -11,10 +11,9 @@ const Account = () => {
 
     const { isAuthenticated, users, logout } = useContext(AuthContext)
      
-
     let navigate = useNavigate()
 
-    const id = users._id
+    const id = users ? users._id : null
 
     useEffect(()=> {
         const getUserAccount = async () => {
@@ -26,10 +25,12 @@ const Account = () => {
                 console.error('Error fetching user', error)
             }
         }
+        if (id) {
         getUserAccount()
+        }
     }, [id])
 
-    const [name, setName] = useState(user.name)
+    const [name, setName] = useState(users.name)
     const [userName, setUserName] = useState(user.userName)
     const [email, setEmail] = useState(user.email)
     const [password, setPassword] = useState(user.password)

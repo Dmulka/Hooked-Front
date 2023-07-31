@@ -1,24 +1,24 @@
 import { createContext, useState } from "react"
 
-const AuthContext = createContext();
+const AuthContext = createContext()
 
-const AuthProvider = (props) => {
+const AuthProvider = ({children}) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const [users, setUser] = useState(null)
+    const [user, setUser] = useState(null)
 
     const login = (userData) => {
         setIsAuthenticated(true)
         setUser(userData)
     }
 
-    const logout = () => {
+    const logout = (userData) => {
         setIsAuthenticated(false)
         setUser(null)
     }
 
 return (
-    <AuthContext.Provider value={{ isAuthenticated, users, login, logout }}>
-        {props.children}
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+        {children}
     </AuthContext.Provider>
 )}
 
