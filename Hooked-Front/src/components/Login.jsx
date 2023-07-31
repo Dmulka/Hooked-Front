@@ -11,6 +11,7 @@ const Login = () => {
     password: '',
 })
     const [users, setUsers] = useState([])
+    const [selectedUser, setSelectedUser] = useState(null)
 
     useEffect(() => {
         fetchUser()

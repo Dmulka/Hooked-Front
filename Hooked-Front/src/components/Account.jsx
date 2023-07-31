@@ -1,5 +1,5 @@
 import { useNavigate,} from 'react-router-dom'
-import { useState, userEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from'../context/AuthContext'
 import axios from 'axios'
 
@@ -9,18 +9,19 @@ import axios from 'axios'
 
 const Account = () => {
 
-    const { isAuthenticated, user, logout } = userContext(AuthContext)
-    const id = user._id 
+    const { isAuthenticated, users, logout } = useContext(AuthContext)
+     
 
-    let navigte = useNavigate()
+    let navigate = useNavigate()
 
+    const id = users._id
 
     useEffect(()=> {
         const getUserAccount = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/api/users${id}`)
+                const response = await axios.get(`http://localhost:3001/api/users/${id}`)
                 const data = response.data 
-                console.log(response)
+                console.log(data)
             } catch (error) {
                 console.error('Error fetching user', error)
             }
@@ -28,7 +29,7 @@ const Account = () => {
         getUserAccount()
     }, [id])
 
-    const [name, setname] = useState(user.name)
+    const [name, setName] = useState(user.name)
     const [userName, setUserName] = useState(user.userName)
     const [email, setEmail] = useState(user.email)
     const [password, setPassword] = useState(user.password)
@@ -36,7 +37,7 @@ const Account = () => {
 
     const handleAccountUpdate = async () => {
         try {
-            const response = await axios.put(`http://localhost:3001/api/users${id}`, {
+            const response = await axios.put(`http://localhost:3001/api/users/${id}`, {
                name: name,
                userName: userName,
                email: email,
@@ -49,7 +50,7 @@ const Account = () => {
 
         const handleDelete = async () => {
             try {
-                await axios.delete(`http://localhost:3001/api/users${id}`,)
+                await axios.delete(`http://localhost:3001/api/users/${id}`,)
                 setSuccess(true)
                 handleLogout()
             } catch (error) {
@@ -75,7 +76,7 @@ const Account = () => {
                 <div className ='form-input'>
                     <p>Nmae: {user.name}</p>
                     <label htmlFor='name'>Name:</label>
-                    <input onChange {(e) => setName(e.target.value)}
+                    <input onChange={(e) => setName(e.target.value)}
                            type='text'
                            placeholder="Update Name"/>
                            <button type='submit' onClick={handleAccountUpdate}>Update</button>
@@ -83,7 +84,7 @@ const Account = () => {
                 <div className ='form-input'>
                     <p>Username: {user.userName}</p>
                     <label htmlFor='userName'>Username:</label>
-                    <input onChange {(e) => setUserName(e.target.value)}
+                    <input onChange={(e) => setUserName(e.target.value)}
                            type='text'
                            placeholder="Update username"/>
                            <button type='submit' onClick={handleAccountUpdate}>Update</button>
@@ -91,7 +92,7 @@ const Account = () => {
                 <div className ='form-input'>
                     <p>Email: {user.eamil}</p>
                     <label htmlFor='name'>Email:</label>
-                    <input onChange {(e) => setEmail(e.target.value)}
+                    <input onChange={(e) => setEmail(e.target.value)}
                            type='eamil'
                            placeholder="Update Name"/>
                            <button type='submit' onClick={handleAccountUpdate}>Update</button>
@@ -99,7 +100,7 @@ const Account = () => {
                 <div className ='form-input'>
                     <p>Password: {user.password}</p>
                     <label htmlFor='name'>Password:</label>
-                    <input onChange {(e) => setPassword(e.target.value)}
+                    <input onChange={(e) => setPassword(e.target.value)}
                            type='text'
                            placeholder="Update Name"/>
                            <button type='submit' onClick={handleAccountUpdate}>Update</button>

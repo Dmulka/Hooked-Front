@@ -4,17 +4,20 @@ const AuthContext = createContext();
 
 const AuthProvider = (props) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [users, setUser] = useState(null)
 
-    const login = () => {
+    const login = (userData) => {
         setIsAuthenticated(true)
+        setUser(userData)
     }
 
     const logout = () => {
         setIsAuthenticated(false)
+        setUser(null)
     }
 
 return (
-    <AuthContext.Provider value ={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, users, login, logout }}>
         {props.children}
     </AuthContext.Provider>
 )}
