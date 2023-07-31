@@ -21,6 +21,8 @@ const Report = () => {
     const [LocationLoading, setLocationLoading] = useState(false)
     const [success, setSuccess] = useState(false)
     const [latitude, setLatitude] = useState('')
+    const [address, setAddress] = useState('')
+    const [longitude, setLongitude] = useState('')
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -61,18 +63,7 @@ const Report = () => {
                  } catch (error) {
                     console.log(error)
                 }
-         }                           
-           
-            const handleSubmit = async (evt) => {
-                evt.preventDefault()
-                console.log(formState)
-                setSuccess(true)
-                if (formState.lat !== '' && formState.lon !== '') {
-                    postReport()
-                } else if (formState.lat === '' && formState.lon === '' && formState.address !== '') { // Updated condition
-                    geocode(formState.address);
-                }     
-        }}
+         }      
 
             const postReport = async () => {
         try {
@@ -92,8 +83,19 @@ const Report = () => {
                 setErrorMessage ('No server response')
             } else {
                 setErrorMessage('signup faild') 
-        }}
-    
+        }}}
+
+        const handleSubmit = async (evt) => {
+            evt.preventDefault()
+            console.log(formState)
+            setSuccess(true)
+            if (formState.lat !== '' && formState.lon !== '') {
+                postReport()
+            } else if (formState.lat === '' && formState.lon === '' && formState.address !== '') { // Updated condition
+                geocode(formState.address);
+            }     
+     }
+
     return (
         <div className="report-form-page">
         {success ? (
@@ -106,7 +108,7 @@ const Report = () => {
       ) : (
         <div className='form-container'>
         <form className='create-account-form' onSubmit={handleSubmit}>
-            <h4>Create an Accouunt</h4>
+            <h4>File a Report</h4>
             <div className ='form-input'>
                 <label htmlFor='depth'>Depth:</label>
                 <input onChange ={handleChange}
