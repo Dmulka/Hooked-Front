@@ -1,4 +1,4 @@
-import { useNavigate,} from 'react-router-dom'
+import { useNavigate, Link }  from 'react-router-dom'
 import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from'../context/AuthContext'
 import axios from 'axios'
@@ -9,11 +9,11 @@ import axios from 'axios'
 
 const Account = () => {
 
-    const { isAuthenticated, users, logout } = useContext(AuthContext)
+    const { isAuthenticated, user, logout } = useContext(AuthContext)
      
     let navigate = useNavigate()
 
-    const id = users ? users._id : null
+    const id = user ? user._id : null
 
     useEffect(()=> {
         const getUserAccount = async () => {
@@ -30,11 +30,11 @@ const Account = () => {
         }
     }, [id])
 
-    const [name, setName] = useState(users.name)
-    const [userName, setUserName] = useState(user.userName)
-    const [email, setEmail] = useState(user.email)
-    const [password, setPassword] = useState(user.password)
-    const [success, setSuccess] = useState(false)
+    const [name, setName] = useState(user ? user.name : ''); 
+    const [userName, setUserName] = useState(user ? user.userName : ''); 
+    const [email, setEmail] = useState(user ? user.email : '')
+    const [password, setPassword] = useState(user ? user.password : ''); 
+    const [success, setSuccess] = useState(false);
 
     const handleAccountUpdate = async () => {
         try {
@@ -70,9 +70,9 @@ const Account = () => {
             }
 
     return (
-        <div calssName='usePage'>
+        <div className='usePage'>
         <div className='form-container'>
-            <form className='update-account-form' onSubmit={handleSubmit}>
+            <form className='update-account-form'>
                 <h4>Account Page</h4>
                 <div className ='form-input'>
                     <p>Nmae: {user.name}</p>
@@ -106,8 +106,13 @@ const Account = () => {
                            placeholder="Update Name"/>
                            <button type='submit' onClick={handleAccountUpdate}>Update</button>
                 </div>
-                    <button type='submit'> Create Account</button>
-                    {errorMessage && <p>{errorMessage}</p>}
+                <div className='userbuttons'>
+                    <Link to="/" class="home"><button id='deleteaccount'type="button" onClick={handleDelete}>Delete Profile</button></Link>
+                    <button id='logout' type='button' onClick={handleLogout}>Logout</button>
+                    <button id="userReports" onClick={showUserReports}>My Reports</button>
+                </div>
+                    {/* <button type='submit'> Create Account</button>
+                    {errorMessage && <p>{errorMessage}</p>} */}
             </form>
         </div>
     </div>

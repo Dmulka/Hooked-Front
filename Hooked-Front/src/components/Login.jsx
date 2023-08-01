@@ -58,7 +58,7 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-    const user = users.find((user) => user.userName === formState.userName)
+    const user = users.find((user) => user.userName === formState.userName && user.password === formState.password)
     if (user) {
       console.log('Logged in:', user);
       setFormState({ ...formState, valid: 'Login Successful' });

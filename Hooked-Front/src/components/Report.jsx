@@ -21,7 +21,6 @@ const Report = () => {
     const [LocationLoading, setLocationLoading] = useState(false)
     const [success, setSuccess] = useState(false)
     const [latitude, setLatitude] = useState('')
-    const [address, setAddress] = useState('')
     const [longitude, setLongitude] = useState('')
 
     const handleChange = (evt) => {
@@ -32,14 +31,14 @@ const Report = () => {
     const handleGeolocation = (e) => {
         e.preventDefault()
         if (navigator.geolocation) {
-            setLocationLoding(true)
+            setLocationLoading(true)
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                 let latitude = position.coords.latitude
                 let longitude = position.coords.longitude
                 setLongitude(longitude)
                 setLatitude(latitude)
-                setLocatioonLoadng(false)
+                setLocationLoading(false)
             },
             (error) => {
                 console.log('error', error)
@@ -59,22 +58,22 @@ const Report = () => {
                     console.log('longitude', location[0])
                     setLongitude(location[0])
                     setLatitude(location[1])
-                    newReport(location[1], location[0])
+                    postReport(location[1], location[0])
                  } catch (error) {
                     console.log(error)
                 }
          }      
 
-            const postReport = async () => {
+        const postReport = async (lat, lon) => {
         try {
             const response = await axios.post('http://localhost:3001/api/reports',{
-                lon: formState.lon,
-                lat: formState.lat,
+                lon: lon,
+                lat: lat,
                 species: formState.species._id,
                 depth: formState.depth,
                 season: formState.season,
                 lures: formState.lures,
-                comment: formState.comment
+                comment: formState.comments
             })
             console.log(response.data)
             setFormState(initialState)
@@ -110,10 +109,20 @@ const Report = () => {
         <form className='create-account-form' onSubmit={handleSubmit}>
             <h4>File a Report</h4>
             <div className ='form-input'>
+                <label htmlFor='lures'>Species:</label>
+                <input onChange ={handleChange}
+                       name='species'
+                       type= 'text'
+                       id= 'species'
+                       placeholder="Species"
+                       value={formState.species._id}
+                        />
+            </div>
+            <div className ='form-input'>
                 <label htmlFor='depth'>Depth:</label>
                 <input onChange ={handleChange}
                        name='depth'
-                       type= {Number}
+                       type= 'number'
                        id= 'depth'
                        placeholder="Depth"
                        value={formState.depth}
@@ -135,17 +144,17 @@ const Report = () => {
                        type= 'text'
                        id= 'lures'
                        placeholder="Lure used"
-                       value={formState.depth}
+                       value={formState.lures}
                         />
             </div>
             <div className ='form-input'>
-                <label htmlFor='comment'>Comment</label>
-                <input onChange ={handleChange}
-                       name='comment'
+                <label htmlFor='comments'>Comment</label>
+                <textarea onChange ={handleChange}
+                       name='comments'
                        type= 'text'
                        id= 'comment'
                        placeholder="Leave a comment"
-                       value={formState.depth}
+                       value={formState.comments}
                         />
             </div>
             <div className ='form-input'>
@@ -157,8 +166,8 @@ const Report = () => {
                             <button id="havelocation">Received</button>
                         ) : (
                      <button id="currentLocation" type='button' onClick={handleGeolocation}>Use Location</button>))} 
-                     <p id='or'>OR</p>
-                    <textarea id='address' onChange={handleChange} placeholder='Enter address'></textarea>
+                     {/* <p id='or'>OR</p>
+                    <textarea id='address' onChange={handleChange} placeholder='Enter address'></textarea> */}
                 </div>
             </div>
             <button className='submitBtn' type='submit'>Submit Report </button>
