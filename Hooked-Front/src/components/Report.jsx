@@ -20,12 +20,12 @@ const Report = () => {
     const [errorMessage, setErrorMessage] = useState('')
     const [LocationLoading, setLocationLoading] = useState(false)
     const [success, setSuccess] = useState(false)
-    const [latitude, setLatitude] = useState('')
-    const [longitude, setLongitude] = useState('')
+    const [lat, setLatitude] = useState('')
+    const [lon, setLongitude] = useState('')
 
     const handleChange = (evt) => {
-        const { name, value } = evt.target;
-        setFormState({ ...formState, [name]: value });
+        const { id, value } = evt.target;
+        setFormState({ ...formState, [id]: value });
     }
 
     const handleGeolocation = (e) => {
@@ -50,9 +50,9 @@ const Report = () => {
         }
     }
 
-        const geocode = async (address) => {
+        const geocode = async () => {
         try{
-                const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${import.meta.env.VITE_APP_MAPBOXTOKEN}`)
+                const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent()}.json?access_token=${import.meta.env.VITE_APP_MAPBOXTOKEN}`)
                     const location = response.data.features[0].geometry.coordinates
                     console.log('latitude', location[1])
                     console.log('longitude', location[0])
@@ -90,10 +90,10 @@ const Report = () => {
             setSuccess(true)
             if (formState.lat !== '' && formState.lon !== '') {
                 postReport()
-            } else if (formState.lat === '' && formState.lon === '' && formState.address !== '') { // Updated condition
-                geocode(formState.address);
-            }     
-     }
+            } else if (formState.lat === '' && formState.lon === ''){
+                postReport(lat, lon)
+            }
+        } 
 
     return (
         <div className="report-form-page">
@@ -131,10 +131,10 @@ const Report = () => {
             <div className ='form-input'>
                 <label htmlFor='season'>Season:</label>
                 <select id='season' onChange ={handleChange}>
-                    <option value='Winter'>Winter</option>
-                    <option value='Spring'>Spring</option>
-                    <option value='Summer'>Summer</option>
-                    <option value='Fall'>Fall</option>
+                    <option id='season' value='Winter'>Winter</option>
+                    <option id='season' value='Spring'>Spring</option>
+                    <option id='season' value='Summer'>Summer</option>
+                    <option id='season' value='Fall'>Fall</option>
                 </select>     
             </div>
             <div className ='form-input'>
@@ -152,7 +152,7 @@ const Report = () => {
                 <textarea onChange ={handleChange}
                        name='comments'
                        type= 'text'
-                       id= 'comment'
+                       id= 'comments'
                        placeholder="Leave a comment"
                        value={formState.comments}
                         />
@@ -162,7 +162,7 @@ const Report = () => {
                 <div className='locationdiv'>
                 {LocationLoading ? ( <button id="loadinglocation">Getting Location</button>
                     ) : (
-                        latitude !== '' ? (
+                        lat !== '' ? (
                             <button id="havelocation">Received</button>
                         ) : (
                      <button id="currentLocation" type='button' onClick={handleGeolocation}>Use Location</button>))} 
