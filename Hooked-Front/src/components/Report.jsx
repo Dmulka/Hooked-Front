@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import { Link } from 'react-router-dom'
@@ -22,6 +22,20 @@ const Report = () => {
     const [success, setSuccess] = useState(false)
     const [lat, setLatitude] = useState('')
     const [lon, setLongitude] = useState('')
+    const [speciesOptions, setSpeciesOptions] = useState([])
+
+
+    useEffect(() => { 
+        const fetchSpecies = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/api/species')
+                setSpeciesOptions(response.data)
+            } catch (error) {
+                console.error('Error fetching species', error)
+            }
+        }
+        fetchSpecies()
+    }, []) 
 
     const handleChange = (evt) => {
         const { id, value } = evt.target;
@@ -69,7 +83,7 @@ const Report = () => {
             const response = await axios.post('http://localhost:3001/api/reports',{
                 lon: lon,
                 lat: lat,
-                species: formState.species._id,
+                species: formState.species.name,
                 depth: formState.depth,
                 season: formState.season,
                 lures: formState.lures,
@@ -92,8 +106,7 @@ const Report = () => {
                 postReport()
             } else if (formState.lat === '' && formState.lon === ''){
                 postReport(lat, lon)
-            }
-        } 
+            }} 
 
     return (
         <div className="report-form-page">
@@ -110,13 +123,14 @@ const Report = () => {
             <h4>File a Report</h4>
             <div className ='form-input'>
                 <label htmlFor='lures'>Species:</label>
-                <input onChange ={handleChange}
-                       name='species'
-                       type= 'text'
-                       id= 'species'
-                       placeholder="Species"
-                       value={formState.species._id}
-                        />
+                <select id='species' onChange={handleChange} value={formState.species}>    
+                <option value="">Select Species</option>
+                {speciesOptions.map((species) => (
+                  <option key={species._id} value={species.name}>
+                    {species.name}
+                  </option>
+                ))}
+                </select>          
             </div>
             <div className ='form-input'>
                 <label htmlFor='depth'>Depth:</label>

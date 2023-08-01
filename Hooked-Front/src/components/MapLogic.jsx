@@ -30,7 +30,7 @@ const MapLogic = () => {
         const comment = entry.comment 
         const marker = new mapboxgl.Marker({color: '#FFC000'})
         .setLngLat([lon, lat])
-        .setPopup(new mapboxgl.Popup({className: 'popup'}).setHTML(`<h2>Report of ${species} at ${season} on ${depth} </h2>`))
+        .setPopup(new mapboxgl.Popup({className: 'popup'}).setHTML(`<h2> ${species}   ${season} ${depth}ft </h2>`))
         .addTo(map)
     })
 
