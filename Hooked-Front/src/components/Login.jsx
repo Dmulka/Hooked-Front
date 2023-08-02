@@ -62,7 +62,7 @@ const Login = () => {
     if (user) {
       console.log('Logged in:', user);
       setFormState({ ...formState, valid: 'Login Successful' });
-      localStorage.setItem('user', JSON.stringify(user)); // Store user in local storage
+      localStorage.setItem('user', JSON.stringify(user)); 
       login(user);
       setSelectedUser(user)
 
@@ -81,9 +81,8 @@ const Login = () => {
         <div className='login'> 
             <div className='form -container'>
                 <form className='login-form' onSubmit={handleSubmit}>
-                    <h4>Pleae log in.</h4>
-                    <div className='Login-questions'>
-                        <label htmlFor='userName'>Username</label>
+                    <h4>Please log in.</h4>
+                    <div className='form-floating'>
                         <input 
                             type= 'text'
                             name='userName'
@@ -91,18 +90,21 @@ const Login = () => {
                             onChange= {handleChange}
                             placeholder='Username'
                             value={formState.userName}
+                            className='form-control form-control-lg'
                             />
+                        <label for='userName' className='form-label'>Username</label>
                     </div>
-                    <div className='Login-questions'>
-                        <label htmlFor='password'>Password</label>
+                    <div className='form-floating'>
                         <input 
                             type= 'password'
                             name='password'
                             id='password'
-                            onChange= {handleChange}
+                            onChange= {handleChange} 
                             placeholder='Password'
                             value={formState.password}
+                            className='form-control form-control-lg'
                             />
+                        <label for='userName' className='form-label' >Password</label>
                     </div>
                         <button className='login-button' type='submit'>
                             Log in
@@ -110,7 +112,7 @@ const Login = () => {
                         {formState.valid && <p>{formState.valid}</p>}
                         {selectedUser ? (
                             <div className='loginbuttons'>
-                            <button className='profbutton' onClick={showAccount}>Go Account Page</button>
+                            {/* <button className='profbutton' onClick={showAccount}>Go Account Page</button> */}
                             <button className='logout' onClick={handleLogout}>Logout</button>
                             </div>
                         ) : (
