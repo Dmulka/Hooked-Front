@@ -50,10 +50,10 @@ const Login = () => {
     }
 
     const handleLogout = () => {
-        localStorage.removeItem('users'); // Clear user from local storage
-        logout(); // Clear user from context
-        setSelectedUser(null);
-        navigate(`/login?id=${selectedUser._id}`); // Navigate to login page with user ID as query parameter
+        localStorage.removeItem('users')
+        logout()
+        setSelectedUser(null)
+        navigate(`/login?id=${selectedUser._id}`)
       };
 
     const handleSubmit = (event) => {
@@ -83,7 +83,7 @@ const Login = () => {
                 <form className='login-form' onSubmit={handleSubmit}>
                     <h4>Pleae log in.</h4>
                     <div className='Login-questions'>
-                        <label htmlFor='userName'>userName</label>
+                        <label htmlFor='userName'>Username</label>
                         <input 
                             type= 'text'
                             name='userName'
@@ -94,7 +94,7 @@ const Login = () => {
                             />
                     </div>
                     <div className='Login-questions'>
-                        <label htmlFor='password'>password</label>
+                        <label htmlFor='password'>Password</label>
                         <input 
                             type= 'password'
                             name='password'

@@ -120,10 +120,10 @@ const Report = () => {
         <div className="report-form-page">
         {success ? (
           <section>
-              {/* <h1>Report successfully created.</h1>
+              <h1>Report successfully created.</h1>
               <p>
               <Link className="mappage" to="/"><button id="MapPage" className="submit-button">Go to Map.</button></Link> 
-              </p> */}
+              </p>
           </section>
       ) : (
         <div className='form-container'>

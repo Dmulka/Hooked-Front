@@ -10,13 +10,26 @@ const Nav = () => {
             <div className='Container'>
                 <Link className="navbar-brand" to="/">Hooked</Link>
             <div className="navbar-nav ms-auto">
-                <Link className='nav' to='/'>Home</Link>
-                {isAuthenticated ? null : <Link className='nav' to='/login'>Login</Link>}
-                {isAuthenticated ? <Link className='nav' to='/mappage'>Map</Link> : null}
-                {isAuthenticated ? <Link className='nav' to='/report'>Report</Link> : null}
-                {isAuthenticated ? null : <Link className='nav' to='/createaccount'>Create Account</Link>}
+               <ul className='navbar-nav'>
+                <li classNmae= 'nav-item'> 
+                 <Link className='nav' to='/'>Home</Link>
+                </li>
+                <li classNmae= 'nav-item'> 
+                    {isAuthenticated ? null : <Link className='nav' to='/login'>Login</Link>}
+                </li>
+                <li classNmae= 'nav-item'> 
+                    {isAuthenticated ? <Link className='nav' to='/mappage'>Map</Link> : null}
+                </li>
+                <li classNmae= 'nav-item'> 
+                    {isAuthenticated ? <Link className='nav' to='/report'>Report</Link> : null}
+                 </li>  
+                 <li classNmae= 'nav-item'>  
+                    {isAuthenticated ? null : <Link className='nav' to='/createaccount'>Create Account</Link>}
+                 </li>
+                 <li classNmae= 'nav-item'> 
                 {isAuthenticated ? <Link className='nav' to='/account'>Account</Link> : null}
-                
+                </li>
+                </ul> 
             </div>
             </div>
         </nav> 
