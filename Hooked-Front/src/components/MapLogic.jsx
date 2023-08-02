@@ -21,16 +21,17 @@ const MapLogic = () => {
         zoom: 10,
     })
     data.forEach((entry) => {
+        console.log(entry)
         const lon = entry.lon 
         const lat = entry.lat 
-        const species = entry.species
+        const species = entry.species?.name
         const depth = entry.depth
         const season = entry.season
         const lures = entry.lures
         const comment = entry.comment 
         const marker = new mapboxgl.Marker({color: '#FFC000'})
         .setLngLat([lon, lat])
-        .setPopup(new mapboxgl.Popup({className: 'popup'}).setHTML(`<h2> ${species}   ${season} ${depth}ft </h2>`))
+        .setPopup(new mapboxgl.Popup({className: 'popup'}).setHTML(`<ul> <li>${species}</li> <li>${season}</li> <li>${depth}ft</li> <li>${lures}</li>  </ul> </h3> `))
         .addTo(map)
     })
 

@@ -39,7 +39,15 @@ const Report = () => {
 
     const handleChange = (evt) => {
         const { id, value } = evt.target;
+        console.log(id)
+        console.log(value)
         setFormState({ ...formState, [id]: value });
+    }
+
+    const handleSpeciesChange = (evt) => {
+        const { id , name } = evt.target
+        setFormState({ ...formState, [id]: name });
+    
     }
 
     const handleGeolocation = (e) => {
@@ -83,7 +91,7 @@ const Report = () => {
             const response = await axios.post('http://localhost:3001/api/reports',{
                 lon: lon,
                 lat: lat,
-                species: formState.species.name,
+                species: formState.species,
                 depth: formState.depth,
                 season: formState.season,
                 lures: formState.lures,
@@ -112,10 +120,10 @@ const Report = () => {
         <div className="report-form-page">
         {success ? (
           <section>
-              <h1>Report successfully created.</h1>
+              {/* <h1>Report successfully created.</h1>
               <p>
-              <Link className="mappage" to="/"><button id="MapPage" className="submit-button">Go home.</button></Link> 
-              </p>
+              <Link className="mappage" to="/"><button id="MapPage" className="submit-button">Go to Map.</button></Link> 
+              </p> */}
           </section>
       ) : (
         <div className='form-container'>
@@ -126,7 +134,7 @@ const Report = () => {
                 <select id='species' onChange={handleChange} value={formState.species}>    
                 <option value="">Select Species</option>
                 {speciesOptions.map((species) => (
-                  <option key={species._id} value={species.name}>
+                  <option key={species._id} value={species._id}>
                     {species.name}
                   </option>
                 ))}
@@ -180,8 +188,6 @@ const Report = () => {
                             <button id="havelocation">Received</button>
                         ) : (
                      <button id="currentLocation" type='button' onClick={handleGeolocation}>Use Location</button>))} 
-                     {/* <p id='or'>OR</p>
-                    <textarea id='address' onChange={handleChange} placeholder='Enter address'></textarea> */}
                 </div>
             </div>
             <button className='submitBtn' type='submit'>Submit Report </button>

@@ -5,6 +5,8 @@ import CreateAccount from './CreateAccount'
 import MapPage from './MapPage'
 import Report from './Report'
 import Account from './Account'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min'
 
 
 const Main = () => {

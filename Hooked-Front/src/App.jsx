@@ -3,6 +3,13 @@ import Header from './components/Header'
 import Main from './components/Main'
 import Footer from './components/Footer'
 
+
+// Import our custom CSS
+// import '../scss/styles.scss'
+
+// Import all of Bootstrap's JS
+// import * as bootstrap from 'bootstrap'
+
 import './App.css'
 
 function App() {
